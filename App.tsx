@@ -1,14 +1,18 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React, {FC} from 'react';
-import {RootNavigator} from './src';
+import {Provider} from 'react-redux';
+import {RootNavigator, store} from './src';
 
 interface Props {}
 
 const App: FC<Props> = () => {
+  console.log('🚀 ~ file: App.tsx:9 ~ store:', store.getState());
   return (
-    <NavigationContainer>
-      <RootNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 };
 
