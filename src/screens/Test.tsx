@@ -33,16 +33,16 @@ const Test: FC<Props> = () => {
       <Text style={styles.textCounter}>{count}</Text>
       <View style={styles.btnCover}>
         <TouchableOpacity
-          onPress={handleIncrement}
-          activeOpacity={0.8}
-          style={styles.btn}>
-          <Text style={styles.btnText}>Increment</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
           onPress={handleDecrement}
           activeOpacity={0.8}
           style={styles.btn}>
           <Text style={styles.btnText}>Decrement</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={handleIncrement}
+          activeOpacity={0.8}
+          style={styles.btn}>
+          <Text style={styles.btnText}>Increment</Text>
         </TouchableOpacity>
       </View>
 
