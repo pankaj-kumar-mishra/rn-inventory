@@ -7,7 +7,6 @@ import {persistor, RootNavigator, store} from './src';
 interface Props {}
 
 const App: FC<Props> = () => {
-  console.log('🚀 ~ file: App.tsx:9 ~ store:', store.getState());
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>

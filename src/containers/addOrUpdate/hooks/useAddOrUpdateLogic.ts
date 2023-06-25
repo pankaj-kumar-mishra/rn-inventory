@@ -1,11 +1,11 @@
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useCallback, useState, useEffect} from 'react';
+import {useCallback, useState, useEffect, useMemo} from 'react';
 import {Alert} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import uuid from 'react-native-uuid';
 import {addProduct, updateProduct} from '../../../redux/reducers/productsSlice';
 import {selectActiveProducts} from '../../../redux/selectors';
-import {ProductModel} from '../../../utils';
+import {areSameObjects, ProductModel} from '../../../utils';
 import {AddOrUpdateNavigationProps, AddOrUpdateRouteProps} from '../types';
 
 export const useAddOrUpdateLogic = () => {
@@ -22,14 +22,18 @@ export const useAddOrUpdateLogic = () => {
     sku: 'sku_',
   }));
 
+  const currProduct = useMemo(
+    () => products.find(item => item._id === params?._id),
+    [params?._id, products],
+  );
+
   useEffect(() => {
     if (params?._id) {
-      const currProduct = products.find(item => item._id === params._id);
       if (currProduct) {
         setFormData(currProduct);
       }
     }
-  }, [params?._id, products]);
+  }, [currProduct, params?._id]);
 
   const handleFormData = useCallback((key: string, value: string) => {
     setFormData(prev => ({...prev, [key]: value}));
@@ -50,7 +54,9 @@ export const useAddOrUpdateLogic = () => {
     }
 
     if (params?._id) {
-      handleUpdate();
+      if (!areSameObjects(currProduct, formData)) {
+        handleUpdate();
+      }
     } else {
       handleAdd();
     }

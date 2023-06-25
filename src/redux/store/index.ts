@@ -7,6 +7,7 @@ const rootPersistConfig = {
   key: 'root',
   storage: reduxStorage,
   blacklist: ['test'],
+  // blacklist: ['test', 'products'],
 };
 
 const testPersistConfig = {
