@@ -6,15 +6,9 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {Home, AddOrUpdate, Test} from '../containers';
 import {Button} from '../components';
+import {RootStackParamList} from './types';
 
 interface Props {}
-
-export type RootStackParamList = {
-  Home: undefined;
-  AddOrUpdate: undefined | {_id: string};
-
-  Test: undefined;
-};
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

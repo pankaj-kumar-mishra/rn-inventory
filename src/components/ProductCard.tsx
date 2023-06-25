@@ -56,7 +56,7 @@ const ProductCard: FC<Props> = memo(
           </View>
         </View>
         <View>
-          <Text style={styles.subTitle}>SKU: {sku}</Text>
+          <Text style={styles.subTitle}>{sku}</Text>
           <Image
             source={{uri: isValidImage ? image : FALLBACK_IMAGE}}
             resizeMode="cover"
