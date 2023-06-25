@@ -19,7 +19,7 @@ export interface ProductUpdateRequestModel {
       sku: string;
     };
     update: {
-      $set: Partial<Omit<ProductModel, '_id' | 'sku'>>;
+      $set: Partial<Omit<ProductModel, '_id'>>;
     };
   };
 }

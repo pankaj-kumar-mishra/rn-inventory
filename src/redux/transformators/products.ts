@@ -18,13 +18,15 @@ export const prepareInsertRequestData = (
 export const prepareUpdateRequestData = (
   data: ProductModel,
 ): ProductUpdateRequestModel => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const {_id, ...restData} = data;
   return {
     updateOne: {
       filter: {
-        sku: data.sku,
+        sku: restData.sku,
       },
       update: {
-        $set: data,
+        $set: restData,
       },
     },
   };

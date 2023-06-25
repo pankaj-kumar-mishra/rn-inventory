@@ -13,6 +13,7 @@ export const fetchProducts = createAsyncThunk('fetch/Products', async () => {
 
 export const syncAppProducts = createAsyncThunk(
   'sync/Products',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async (reqData: ProductsRequestModel, {dispatch}) => {
     try {
       //   TODO: Create Axios service and handle API calls
@@ -24,14 +25,12 @@ export const syncAppProducts = createAsyncThunk(
         },
         body: JSON.stringify(reqData),
       };
-      console.log(
-        '🚀 ~ file: products.ts:26 ~ JSON.stringify(reqData):',
-        JSON.stringify(reqData),
-      );
 
       const response = await fetch(`${BASE_URL}${PATHS.productSync}`, data);
       const result = await response.json();
-      dispatch(fetchProducts());
+      //   NOTE: To fetch the Products after update in DB,
+      //    we need to uncomment below line and {dispatch} get from thunkApi (line 17)
+      //   dispatch(fetchProducts());
       return result;
     } catch (error) {
       throw error;

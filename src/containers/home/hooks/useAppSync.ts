@@ -1,12 +1,12 @@
-import {useEffect} from 'react';
+import {useCallback, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import {useNetInfo} from '@react-native-community/netinfo';
+import {useIsFocused} from '@react-navigation/native';
 import {
   selectActiveProducts,
   selectPendingRequests,
   selectProductsRequestStatus,
 } from '../../../redux/selectors';
-import {useIsFocused} from '@react-navigation/native';
 import {fetchProducts, syncAppProducts} from '../../../redux/actions';
 
 export const useAppSync = () => {
@@ -17,16 +17,23 @@ export const useAppSync = () => {
   const products = useSelector(selectActiveProducts);
   const {loading, error} = useSelector(selectProductsRequestStatus);
 
-  useEffect(() => {
-    if (
-      products.length === 0 &&
-      pendingRequests.length === 0 &&
-      netInfo.isConnected
-    ) {
+  const handleFetchProducts = useCallback(() => {
+    if (netInfo.isConnected) {
       //   @ts-ignore TODO: Type actions fix
       dispatch(fetchProducts());
     }
-  }, [products.length, netInfo.isConnected, pendingRequests.length, dispatch]);
+  }, [dispatch, netInfo.isConnected]);
+
+  useEffect(() => {
+    if (products.length === 0 && pendingRequests.length === 0) {
+      handleFetchProducts();
+    }
+  }, [
+    products.length,
+    netInfo.isConnected,
+    pendingRequests.length,
+    handleFetchProducts,
+  ]);
 
   useEffect(() => {
     if (isFocused && pendingRequests?.length > 0 && netInfo.isConnected) {
@@ -35,5 +42,5 @@ export const useAppSync = () => {
     }
   }, [dispatch, isFocused, netInfo.isConnected, pendingRequests]);
 
-  return {loading, error};
+  return {loading, error, handleFetchProducts};
 };
