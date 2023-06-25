@@ -2,11 +2,12 @@ import React, {ComponentType, FC, useCallback} from 'react';
 import {FlatList, ListRenderItem} from 'react-native';
 import {NotFound, ProductCard, Separator} from '../../components';
 import {ProductModel} from '../../utils';
-import {useHomeLogic} from './hooks';
+import {useAppSync, useHomeLogic} from './hooks';
 
 interface Props {}
 
 const Home: FC<Props> = () => {
+  useAppSync();
   const {products, handleEditPress, handleDeletePress} = useHomeLogic();
 
   const renderItem: ListRenderItem<ProductModel> = useCallback(
