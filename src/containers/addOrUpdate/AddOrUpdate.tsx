@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {spacing} from '../../utils';
 
 interface Props {}
 
@@ -12,7 +13,9 @@ const AddOrUpdate: FC<Props> = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    paddingHorizontal: spacing.x5,
+  },
 });
 
 export default AddOrUpdate;
