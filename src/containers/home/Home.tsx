@@ -20,7 +20,10 @@ const Home: FC<Props> = () => {
     [handleDeletePress, handleEditPress],
   );
 
-  const keyExtractor = useCallback((item: ProductModel) => item._id, []);
+  const keyExtractor = useCallback(
+    (item: ProductModel) => item._id + '_' + item.sku,
+    [],
+  );
 
   return (
     <FlatList

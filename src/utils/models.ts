@@ -1,8 +1,8 @@
 export interface ProductModel {
   _id: string;
   name: string;
-  price: number;
+  price: string;
   image: string;
-  quantity: number;
+  quantity: string;
   sku: string;
 }
