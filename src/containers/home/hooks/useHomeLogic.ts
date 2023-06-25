@@ -1,13 +1,11 @@
 import {useNavigation} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useCallback} from 'react';
 import {Alert} from 'react-native';
-import {RootStackParamList} from '../../../navigators/rootNavigator';
 import {ProductModel} from '../../../utils';
+import {HomeNavigationProps} from '../types';
 
 export const useHomeLogic = () => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList, 'Home'>>();
+  const navigation = useNavigation<HomeNavigationProps>();
 
   const products: ProductModel[] = [
     {

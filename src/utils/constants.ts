@@ -1,5 +1,5 @@
 export const colors = {
-  primary: 'goldenrod',
+  primary: '#0394fc',
   white: '#fff',
   black: '#000',
   gray: '#777',
