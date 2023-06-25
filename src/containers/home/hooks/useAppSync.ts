@@ -4,8 +4,10 @@ import {useNetInfo} from '@react-native-community/netinfo';
 import {
   selectActiveProducts,
   selectPendingRequests,
+  selectProductsRequestStatus,
 } from '../../../redux/selectors';
 import {useIsFocused} from '@react-navigation/native';
+import {fetchProducts, syncAppProducts} from '../../../redux/actions';
 
 export const useAppSync = () => {
   const netInfo = useNetInfo();
@@ -13,6 +15,7 @@ export const useAppSync = () => {
   const dispatch = useDispatch();
   const pendingRequests = useSelector(selectPendingRequests);
   const products = useSelector(selectActiveProducts);
+  const {loading, error} = useSelector(selectProductsRequestStatus);
 
   useEffect(() => {
     if (
@@ -20,20 +23,17 @@ export const useAppSync = () => {
       pendingRequests.length === 0 &&
       netInfo.isConnected
     ) {
-      // FETCH PRODUCTS DATA
-      console.log('🚀 ~ file: useHomeLogic.ts:20 ~ products:', products);
+      //   @ts-ignore TODO: Type actions fix
+      dispatch(fetchProducts());
     }
-  }, [products, netInfo.isConnected, pendingRequests.length]);
+  }, [products.length, netInfo.isConnected, pendingRequests.length, dispatch]);
 
   useEffect(() => {
     if (isFocused && pendingRequests?.length > 0 && netInfo.isConnected) {
-      // POST PRODUCTS DATA and FETCH PRODUCTS DATA
-      console.log(
-        '🚀 ~ file: useHomeLogic.ts:20 ~ pendingRequests:',
-        pendingRequests,
-      );
+      //   @ts-ignore TODO: Type actions fix
+      dispatch(syncAppProducts(pendingRequests));
     }
-  }, [isFocused, netInfo.isConnected, pendingRequests]);
+  }, [dispatch, isFocused, netInfo.isConnected, pendingRequests]);
 
-  return null;
+  return {loading, error};
 };

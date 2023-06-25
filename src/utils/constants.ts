@@ -23,3 +23,10 @@ export const spacing = {
 };
 
 export const FALLBACK_IMAGE = 'https://placeimg.com/640/480';
+
+// TODO: Create Axios Service for API calls
+export const BASE_URL = 'https://prodsync.vercel.app';
+export const PATHS = {
+  product: '/api/product',
+  productSync: '/api/product/sync',
+};
