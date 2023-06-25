@@ -4,9 +4,14 @@ import {ProductModel} from '../../utils';
 // @ts-ignore TODO: use state as StoreModel
 export const selectStoreProducts = state => state.products;
 
-export const selectProducts = createSelector(
-  selectStoreProducts,
-  item => item.products,
+export const selectProducts = createSelector(selectStoreProducts, item =>
+  Array.isArray(item.products)
+    ? item.products.map((product: ProductModel) => ({
+        ...product,
+        price: product.price?.toString() ?? '',
+        quantity: product.quantity?.toString() ?? '',
+      }))
+    : [],
 );
 
 export const selectActiveProducts = createSelector(
@@ -17,4 +22,9 @@ export const selectActiveProducts = createSelector(
 export const selectPendingRequests = createSelector(
   selectStoreProducts,
   item => item.pendingRequests,
+);
+
+export const selectProductsRequestStatus = createSelector(
+  selectStoreProducts,
+  item => ({loading: item.loading, error: item.error}),
 );

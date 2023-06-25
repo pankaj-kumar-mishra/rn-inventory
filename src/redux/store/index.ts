@@ -26,14 +26,14 @@ const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: getDefaultMiddleware => {
-    let defaultMiddleware: any = getDefaultMiddleware({
+    let defaultMiddleware = getDefaultMiddleware({
       serializableCheck: false,
     });
 
     if (__DEV__) {
       const {logger} = require('redux-logger');
       const createDebugger = require('redux-flipper').default;
-
+      // @ts-ignore TODO: Middleware Type Error
       defaultMiddleware = defaultMiddleware
         .concat(logger)
         .concat(createDebugger());
@@ -45,6 +45,8 @@ const store = configureStore({
 });
 
 const persistor = persistStore(store);
-// console.log('🚀 ~ file: index.ts:47 ~ store:', store.getState());
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export {store, persistor};
