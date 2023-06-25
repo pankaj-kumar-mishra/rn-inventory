@@ -6,6 +6,7 @@ export const colors = {
   red: '#f00',
   green: '#0f0',
   blue: '#00f',
+  disabled: '#ebebe4',
 };
 
 export const spacing = {

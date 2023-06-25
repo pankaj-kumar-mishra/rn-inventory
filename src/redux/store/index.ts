@@ -1,6 +1,6 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {persistReducer, persistStore} from 'redux-persist';
-import {testSlice} from '../reducers';
+import {testSlice, productsSlice} from '../reducers';
 import {reduxStorage} from './storage';
 
 const rootPersistConfig = {
@@ -17,6 +17,7 @@ const testPersistConfig = {
 
 const rootReducer = combineReducers({
   test: persistReducer(testPersistConfig, testSlice),
+  products: productsSlice,
 });
 
 const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
@@ -43,5 +44,6 @@ const store = configureStore({
 });
 
 const persistor = persistStore(store);
+// console.log('🚀 ~ file: index.ts:47 ~ store:', store.getState());
 
 export {store, persistor};

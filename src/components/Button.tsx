@@ -7,7 +7,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import {colors} from '../utils';
+import {colors, spacing} from '../utils';
 
 interface Props {
   text: string;
@@ -33,8 +33,9 @@ const styles = StyleSheet.create({
   btn: {
     borderWidth: 1,
     borderColor: colors.primary,
-    padding: 5,
-    borderRadius: 4,
+    paddingVertical: spacing.x1,
+    paddingHorizontal: spacing.x3,
+    borderRadius: spacing.x1,
     alignItems: 'center',
     justifyContent: 'center',
   },
