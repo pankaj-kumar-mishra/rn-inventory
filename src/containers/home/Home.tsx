@@ -7,7 +7,7 @@ import {useAppSync, useHomeLogic} from './hooks';
 interface Props {}
 
 const Home: FC<Props> = () => {
-  const {loading} = useAppSync();
+  const {loading, handleFetchProducts} = useAppSync();
   const {products, handleEditPress, handleDeletePress} = useHomeLogic();
 
   const renderItem: ListRenderItem<ProductModel> = useCallback(
@@ -31,10 +31,12 @@ const Home: FC<Props> = () => {
       data={products}
       keyExtractor={keyExtractor}
       renderItem={renderItem}
-      ListEmptyComponent={<NotFound isLoading={loading} />}
+      ListEmptyComponent={<NotFound />}
       ItemSeparatorComponent={(<Separator />) as unknown as ComponentType<any>}
       initialNumToRender={10}
       removeClippedSubviews={true}
+      refreshing={loading}
+      onRefresh={handleFetchProducts}
     />
   );
 };

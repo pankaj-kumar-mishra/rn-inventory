@@ -1,37 +1,24 @@
 import React, {FC, memo} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Pressable,
-  ActivityIndicator,
-} from 'react-native';
+import {StyleSheet, View, Text, Pressable} from 'react-native';
 import {colors, spacing} from '../utils';
 
 interface Props {
   text?: string;
-  isLoading?: boolean;
   onPress?: () => void;
 }
 
-const NotFound: FC<Props> = memo(
-  ({text = 'No record found!!!', isLoading = false, onPress}) => {
-    return (
-      <View style={styles.container}>
-        {isLoading ? (
-          <ActivityIndicator size="small" color={colors.primary} />
-        ) : (
-          <Text style={styles.text}>{text}</Text>
-        )}
-        {onPress ? (
-          <Pressable onPress={onPress} style={styles.btn}>
-            <Text style={styles.btnText}>Try Again</Text>
-          </Pressable>
-        ) : null}
-      </View>
-    );
-  },
-);
+const NotFound: FC<Props> = memo(({text = 'No record found!!!', onPress}) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>{text}</Text>
+      {onPress ? (
+        <Pressable onPress={onPress} style={styles.btn}>
+          <Text style={styles.btnText}>Try Again</Text>
+        </Pressable>
+      ) : null}
+    </View>
+  );
+});
 
 const styles = StyleSheet.create({
   container: {

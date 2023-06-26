@@ -37,7 +37,7 @@ const productsSlice = createSlice({
       state.products = action.payload;
     },
     addProduct(state, action) {
-      state.products = [action.payload, ...state.products];
+      state.products = [...state.products, action.payload];
       const data = prepareInsertRequestData(action.payload);
       // @ts-ignore: TODO: '[Symbol.iterator]()' method that returns an iterator
       state.pendingRequests = [...state.pendingRequests, data];
@@ -79,10 +79,6 @@ const productsSlice = createSlice({
         state.loading = false;
         state.products = action.payload;
       });
-    // .addCase(fetchProducts.rejected, (state, action) => {
-    //   state.loading = false;
-    //   state.error = 'Something went wrong!!!';
-    // });
     // Sync Products
     builder
       .addCase(syncAppProducts.pending, state => {
@@ -92,10 +88,6 @@ const productsSlice = createSlice({
         state.loading = false;
         state.pendingRequests = [];
       });
-    // .addCase(syncAppProducts.rejected, state => {
-    //   state.loading = false;
-    //   state.error = 'Something went wrong!!!';
-    // });
     // Common Actions
     builder.addMatcher(isRejectedAction, state => {
       state.loading = false;
