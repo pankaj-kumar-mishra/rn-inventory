@@ -1,4 +1,4 @@
-package com.inventory;
+package com.inventory.pkm;
 
 // react-native-screens
 import android.os.Bundle;

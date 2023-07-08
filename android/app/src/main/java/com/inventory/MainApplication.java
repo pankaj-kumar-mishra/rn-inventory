@@ -1,4 +1,4 @@
-package com.inventory;
+package com.inventory.pkm;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
